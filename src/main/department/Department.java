@@ -8,7 +8,7 @@ import java.util.List;
 
 public abstract class Department {
     protected String name;
-    protected static final int NR_MAX_VOLUNTEER = 10;
+    static final int NR_MAX_VOLUNTEER = 10;
     protected List<Member> members;
 
     public Department(String name) {

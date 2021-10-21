@@ -1,6 +1,9 @@
 package main;
 
+import main.department.Cultural;
 import main.department.Department;
+import main.department.Educational;
+import main.department.IT;
 import main.member.Member;
 
 import java.util.ArrayList;
@@ -16,15 +19,19 @@ public class Main {
         System.out.println("1.Adaugare departamente in organizatie");
         Organisation volunteerOrgX = new Organisation("Volunteering");
 
-        volunteerOrgX.addDepartment("IT");
+        Department depIT = new IT("IT");
+        Department depEdu = new Educational("Educational");
+        Department depCult = new Cultural("Cultural");
+
+        volunteerOrgX.addDepartment(depIT);
         System.out.println(("IT Department added: "));
         System.out.println(volunteerOrgX.getDepartments());
 
-        volunteerOrgX.addDepartment("Educational");
+        volunteerOrgX.addDepartment(depEdu);
         System.out.println(("Educational Department added: "));
         System.out.println(volunteerOrgX.getDepartments());
 
-        volunteerOrgX.addDepartment("Cultural");
+        volunteerOrgX.addDepartment(depCult);
         System.out.println(("Cultural Department added: "));
         System.out.println(volunteerOrgX.getDepartments());
 

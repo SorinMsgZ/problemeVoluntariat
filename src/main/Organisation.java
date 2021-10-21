@@ -31,32 +31,8 @@ public class Organisation {
         return departments;
     }
 
-    public List<Department> addDepartment(String nameDepartment) {
-
-        Department newDepartment;
-        switch (nameDepartment) {
-            case "IT":
-                newDepartment = new IT(nameDepartment);
-                departments.add(newDepartment);
-
-                break;
-            case "Educational":
-                newDepartment = new Educational(nameDepartment);
-                departments.add(newDepartment);
-                break;
-            case "Cultural":
-                newDepartment = new Cultural(nameDepartment);
-                departments.add(newDepartment);
-                break;
-
-        }
-
-        return departments;
-    }
-
-
-    public void setDepartments(List<Department> departments) {
-        this.departments = departments;
+    public void addDepartment(Department department) {
+        departments.add(department);
     }
 
     public Department lookForDepartment(String departmentTarget) {
