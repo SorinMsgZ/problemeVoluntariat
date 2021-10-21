@@ -1,51 +1,49 @@
 package main.department;
 
 
-import main.member.Members;
+import main.member.Member;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Department {
-    protected String nameDepartment;
+    protected String name;
     protected static final int NR_MAX_VOLUNTEER = 10;
-    protected List<Members> listMembers;
+    protected List<Member> members;
 
-    public Department(String nameDepartment, List<Members> listMembers) {
-        this.nameDepartment = nameDepartment;
-        this.listMembers = listMembers;
+    public Department(String name) {
+        this.name = name;
+        members = new ArrayList<>();
     }
 
-    public boolean addMemberToDepartment(Members member) {
-        int actualSize = listMembers.size();
+    public boolean addMember(Member member) {
+
+        int actualSize = members.size();
         if (actualSize < NR_MAX_VOLUNTEER) {
-            listMembers.add(member);
+            members.add(member);
             return true;
-        } else if (actualSize == NR_MAX_VOLUNTEER) {
-            System.out.println("Department completed. No place for additional members");
-            return false;
         } else {
-            System.out.println("Too many volunteers!");
             return false;
         }
     }
 
-    public List<Members> getListMembers() {
-        return listMembers;
+    public List<Member> getMembers() {
+        return members;
     }
 
     public static int getNrMaxVolunteer() {
         return NR_MAX_VOLUNTEER;
     }
 
-    public String getNameDepartment() {
-        return nameDepartment;
+    public String getName() {
+        return name;
     }
 
     @Override
     public String toString() {
         return "Department{" +
-                "nameDepartment='" + nameDepartment + '\'' +
-                ", listMembers=" + listMembers +
+                "name='" + name + '\'' +
+                ", members=" + members +
                 '}';
     }
 }

@@ -2,25 +2,23 @@ package main.department;
 
 
 import main.member.Interest;
-import main.member.Members;
+import main.member.Member;
 
-import java.util.List;
 
 public class Cultural extends Department {
-    public Cultural(String nameDepartment, List<Members> listMembers) {
-        super(nameDepartment, listMembers);
+
+    public Cultural(String nameDepartment) {
+        super(nameDepartment);
     }
 
     @Override
-    public boolean addMemberToDepartment(Members member) {
+    public boolean addMember(Member member) {
         Interest interestOfMember = member.getPrincipalInterest();
-        boolean isActive = member.getCheckActiveMember();
-        if ((interestOfMember.equals(Interest.getInterestValue("muzica"))) ||((interestOfMember.equals(Interest.getInterestValue("socializare"))))) {
-            System.out.println("Volunteer ,"+member.getNameMember()+",  match with the Cultural department");
-         return super.addMemberToDepartment(member);
-        }
-        else{
-            //System.out.println("Volunteer ,"+member.getNameMember()+",  doesen't match with the Cultural department");
+
+        if ((interestOfMember.equals(Interest.MUZICA)) ||
+                ((interestOfMember.equals(Interest.SOCIALIZARE)))) {
+            return super.addMember(member);
+        } else {
             return false;
         }
     }

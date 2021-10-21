@@ -1,58 +1,96 @@
 package main;
 
+import main.department.Cultural;
 import main.department.Department;
-import main.member.Members;
+import main.department.Educational;
+import main.department.IT;
+import main.member.Member;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Organisation {
-    private String nameOfOrganisation;
-    private List<Department> listOfDepartments;
+    private String name;
+    private List<Department> departments;
 
-    public Organisation(String nameOfOrganisation, List<Department> listOfDepartments) {
-        this.nameOfOrganisation = nameOfOrganisation;
-        this.listOfDepartments = listOfDepartments;
+    public Organisation(String name) {
+        this.name = name;
+        departments = new ArrayList<>();
     }
 
-    public void addDepartment(Department department) {
-        listOfDepartments.add(department);
+    public String getName() {
+        return name;
     }
 
-    public void setListOfDepartments(List<Department> listOfDepartments) {
-        this.listOfDepartments = listOfDepartments;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void deleteDepartement(Department department) {
-        System.out.println("#The available departments are: ");
-        for (Department departmentList : listOfDepartments) {
-            System.out.println(departmentList);
+    public List<Department> getDepartments() {
+        return departments;
+    }
+
+    public List<Department> addDepartment(String nameDepartment) {
+
+        Department newDepartment;
+        switch (nameDepartment) {
+            case "IT":
+                newDepartment = new IT(nameDepartment);
+                departments.add(newDepartment);
+
+                break;
+            case "Educational":
+                newDepartment = new Educational(nameDepartment);
+                departments.add(newDepartment);
+                break;
+            case "Cultural":
+                newDepartment = new Cultural(nameDepartment);
+                departments.add(newDepartment);
+                break;
+
         }
-        listOfDepartments.remove(department);
-        System.out.println("#The department ," + department + ", has been deleted");
-        System.out.println("#Rest of departments still avaiabele: ");
-        for (Department departmentList : listOfDepartments) {
-            System.out.println(departmentList);
+
+        return departments;
+    }
+
+
+    public void setDepartments(List<Department> departments) {
+        this.departments = departments;
+    }
+
+    public Department lookForDepartment(String departmentTarget) {
+        Department theDepartment = null;
+        for (Department availableDepartments : departments) {
+            if (availableDepartments.getName().equals(departmentTarget)) {
+                theDepartment = availableDepartments;
+            }
+
         }
-
+        return theDepartment;
     }
 
-    public void listingMembersOfTheDepartment(Department department) {
-        System.out.println("The members of department ," + department.getNameDepartment() + ", are: ");
-        System.out.println(department.getListMembers());
-
+    public void deleteDepartement(String departmentTarget) {
+        Department departmentToDelete = lookForDepartment(departmentTarget);
+        if (departmentToDelete != null)
+            departments.remove(departmentToDelete);
     }
 
-    public void nbMembersToCompleteDepartment(Department department) {
+    public List<Member> listingMembersOfTheDepartment(String departmentTarget) {
+        Department findDepartment = lookForDepartment(departmentTarget);
+        return findDepartment.getMembers();
+    }
 
-        int actualNbOfMembers = department.getListMembers().size();
+    public int nbMembersToCompleteDepartment(String departmentTarget) {
+        Department findDepartment = lookForDepartment(departmentTarget);
+
+        int actualNbOfMembers = findDepartment.getMembers().size();
         int nbToComplete;
         if (actualNbOfMembers < Department.getNrMaxVolunteer()) {
             nbToComplete = Department.getNrMaxVolunteer() - actualNbOfMembers;
-            System.out.println("Check if departments are complete -> return: The free places for other members");
-            System.out.println(department.getNameDepartment() + ": " + nbToComplete);
+            return nbToComplete;
         } else {
-            throw new RuntimeException("No place for other members. Size of department completetd!");
+            return 0;
         }
     }
 }
